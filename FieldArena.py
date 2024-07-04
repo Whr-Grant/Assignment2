@@ -6,7 +6,7 @@ class Field:
         self.field_type = None
     
     def changeField(self):
-        # Randomly choose one of the three field types
+        # 随机选择三种字段类型中的一种
         field_types = ["Toxic Wasteland", "Healing Meadows", "Castle Walls"]
         self.field_type = random.choice(field_types)
     
@@ -17,7 +17,8 @@ class Field:
         elif self.field_type == "Healing Meadows":
             combatant1.heal(5)
             combatant2.heal(5)
-        # Castle Walls have no effect
+        # Castle Walls 没有效果
+
 class Arena:
     def __init__(self, field):
         self.combatants = []
@@ -37,11 +38,17 @@ class Arena:
     
     def listCombatants(self):
         for combatant in self.combatants:
-            print(combatant.details())  # Assuming details() method is defined in Combatant class
+            if hasattr(combatant, 'details') and callable(getattr(combatant, 'details')):
+                print(combatant.details())  # Assuming details() method is defined in Combatant class
+            else:
+                print(f"{combatant.name} is missing details() method.")
     
     def restoreCombatants(self):
         for combatant in self.combatants:
-            combatant.restore()  # Assuming restore() method is defined in Combatant class
+            if hasattr(combatant, 'restore') and callable(getattr(combatant, 'restore')):
+                combatant.restore()  # Assuming restore() method is defined in Combatant class
+            else:
+                print(f"{combatant.name} is missing restore() method.")
     
     def duel(self, combatant1, combatant2):
         if combatant1 in self.combatants and combatant2 in self.combatants:
@@ -49,7 +56,7 @@ class Arena:
             while round_count < 10 and combatant1.isAlive() and combatant2.isAlive():
                 self.field.applyFieldEffect(combatant1, combatant2)
                 combatant1.attack(combatant2)
-                if combatant2.isAlive():  # Check if combatant2 is still alive after combatant1's attack
+                if combatant2.isAlive():
                     combatant2.attack(combatant1)
                 round_count += 1
             if not combatant1.isAlive():
@@ -60,3 +67,4 @@ class Arena:
                 print("The duel ended in a draw after 10 rounds.")
         else:
             print("Invalid combatants for duel or combatants are not in the arena.")
+
