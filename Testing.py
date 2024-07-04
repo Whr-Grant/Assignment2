@@ -1,5 +1,3 @@
-### Testing
-
 # Create instances of each class
 ranger = Ranger()
 warrior = Warrior()
@@ -25,14 +23,19 @@ print()
 
 # Test cases for Dharok
 print("--- Testing Dharok ---")
-print("Dharok's power with 100 strength, 50 current health, 100 max health:", dharok.calculate_power(100, 50, 100))
+strength = 100
+current_health = 50
+max_health = 100
+print(f"Dharok's power with {strength} strength, {current_health} current health, {max_health} max health:", dharok.calculate_power(strength, current_health, max_health))
 print()
 
 # Test cases for Guthans
 print("--- Testing Guthans ---")
-print("Guthans's power with 80 strength:", guthans.calculate_power(80))
+strength = 80
+print(f"Guthans's power with {strength} strength:", guthans.calculate_power(strength))
 print()
 
 # Test cases for Karil
 print("--- Testing Karil ---")
-print("Karil's power with 90 strength:", karil.calculate_power(90))
+strength = 90
+print(f"Karil's power with {strength} strength:", karil.calculate_power(strength))
